@@ -138,8 +138,9 @@ class PublicationModel extends Model
 
         } else {
             $query =
-                'SELECT * FROM `publication` WHERE ' .
-                '`theme_id` = :tid AND `published` = :p LIMIT :off, :lim';
+                'SELECT * FROM `publication` ' .
+                ' WHERE `theme_id` = :tid AND `published` = :p LIMIT :off, :lim';
+            
             $statement = $this->_conn->prepare($query);
 
             $statement->bindParam(':tid', $themeId, PDO::PARAM_INT);
