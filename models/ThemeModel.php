@@ -11,7 +11,7 @@ class ThemeModel extends Model
 
     // Create-methods
 
-    public function add($name, $description = null, $published = false)
+    public function add($name = null, $description = null, $published = false)
     {
         $query = 'INSERT INTO `theme` (`name`, `description`, `published`) VALUES (:n, :d, :p)';
         $statement = $this->_conn->prepare($query);
