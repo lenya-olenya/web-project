@@ -4,6 +4,11 @@ require_once ROOT.'/models/Model.php';
 
 class PublicationModel extends Model
 {
+	public function __construct() 
+	{ 
+		parent::__construct('publication'); 
+	}
+	
 	public function createPublication($title, $content, $description, $theme_id, $published)
 	{
 		$query = 'INSERT INTO `publication` (`title`, `content`,`description`, `theme_id`, `published`) VALUES (:title, :content, :description, :theme_id, :published)';
@@ -18,7 +23,7 @@ class PublicationModel extends Model
 		]);
 	}
 	
-	public function getTheme ($id) {
+	public function getThemeId ($id) {
 		$query = 'SELECT `theme_id` FROM `publication` WHERE `id`=:id';
 		$statement = $this->_conn->prepare($query);
 
@@ -58,7 +63,7 @@ class PublicationModel extends Model
         return $statement->fetch(PDO::FETCH_NUM)[0];
 	}	
 	
-	public function getIsPublished ($id) {
+	public function isPublished ($id) {
 		$query = 'SELECT `published` FROM `publication` WHERE `id`=:id';
 		$statement = $this->_conn->prepare($query);
 
@@ -108,15 +113,6 @@ class PublicationModel extends Model
         return $statement->execute();		
 	}
 	
-	public function setThemeId ($id, $theme_id) {
-		$query = 'UPDATE `publication` SET `theme_id`=:new_ti WHERE `id`=:id';
-		$statement = $this->_conn->prepare($query);
-
-        $statement->bindParam(':new_ti', $theme_id, PDO::PARAM_INT);
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-
-        return $statement->execute();		
-	}
 	
 	public function setPublished ($id, $publ) {
 		$query = 'UPDATE `publication` SET `published`=:new_p WHERE `id`=:id';
