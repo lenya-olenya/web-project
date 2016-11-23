@@ -29,7 +29,12 @@ class AdminConfigModel extends Model
 
     public function setLogin($login)
     {
-        $query = 'UPDATE `admin_config` SET `login` = :l';
+        if ($this->getCount() === 0) {
+            $query = 'INSERT INTO `admin_config` (`login`) VALUES (:l)';
+        } else {
+            $query = 'UPDATE `admin_config` SET `login` = :l';
+        }
+
         $statement = $this->_conn->prepare($query);
 
         $statement->bindParam(':l', $login);
@@ -39,7 +44,12 @@ class AdminConfigModel extends Model
 
     public function setPassword($password)
     {
-        $query = 'UPDATE `admin_config` SET `password` = :p';
+        if ($this->getCount() === 0) {
+            $query = 'INSERT INTO `admin_config` (`password`) VALUES (:p)';
+        } else {
+            $query = 'UPDATE `admin_config` SET `password` = :p';
+        }
+
         $statement = $this->_conn->prepare($query);
 
         $statement->bindParam(':p', $password);
