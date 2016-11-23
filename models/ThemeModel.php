@@ -27,6 +27,36 @@ class ThemeModel extends Model
 
     // Read-methods
 
+    public function getListPublished($published = true, $offset = null, $limit = null)
+    {
+        if (!isset($offset) && !isset($limit)) {
+            $query = 'SELECT * FROM `theme` WHERE `published` = :p';
+            $statement = $this->_conn->prepare($query);
+            $statement->bindParam(':p', $published, PDO::PARAM_BOOL);
+        } elseif (!isset($offset) && isset($limit)) {
+            $query = 'SELECT * FROM `theme` WHERE `published` = :p LIMIT :lim';
+            $statement = $this->_conn->prepare($query);
+            $statement->bindParam(':p', $published, PDO::PARAM_BOOL);
+            $statement->bindParam(':lim', $limit, PDO::PARAM_INT);
+        } elseif (isset($offset) && !isset($limit)) {
+            $query = 'SELECT * FROM `theme` WHERE `published` = :p LIMIT :off, :lim';
+            $statement = $this->_conn->prepare($query);
+            $statement->bindParam(':p', $published, PDO::PARAM_BOOL);
+            $statement->bindParam(':off', $offset, PDO::PARAM_INT);
+            $statement->bindValue(':lim', (int) $this->getCount(), PDO::PARAM_INT);
+        } else {
+            $query = 'SELECT * FROM `theme` WHERE `published` = :p LIMIT :off, :lim';
+            $statement = $this->_conn->prepare($query);
+            $statement->bindParam(':p', $published, PDO::PARAM_BOOL);
+            $statement->bindParam(':off', $offset, PDO::PARAM_INT);
+            $statement->bindParam(':lim', $limit, PDO::PARAM_INT);
+        }
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getName($id)
     {
         $query = 'SELECT `name` FROM `theme` WHERE `id` = :id';
