@@ -30,7 +30,7 @@ class PublicationModel extends Model
         $statement->bindParam(':tid', $theme_id, PDO::PARAM_INT);
         $statement->bindParam(':p', $published, PDO::PARAM_BOOL);
 
-		$statement->execute();
+        $statement->execute();
 
         return $this->_conn->lastInsertId();
     }
@@ -61,7 +61,7 @@ class PublicationModel extends Model
 
     public function getDescription($id)
     {
-		$query = 'SELECT `description` FROM `publication` WHERE `id` = :id';
+        $query = 'SELECT `description` FROM `publication` WHERE `id` = :id';
         $statement = $this->_conn->prepare($query);
 
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
@@ -97,7 +97,7 @@ class PublicationModel extends Model
     public function setTitle($id, $title)
     {
         $query = 'UPDATE `publication` SET `title` = :new_t WHERE `id` = :id';
-		$statement = $this->_conn->prepare($query);
+        $statement = $this->_conn->prepare($query);
 
         $statement->bindParam(':new_t', $title, PDO::PARAM_STR);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
@@ -118,8 +118,8 @@ class PublicationModel extends Model
 
     public function setDescription($id, $description)
     {
-		$query = 'UPDATE `publication` SET `description` = :new_d WHERE `id` = :id';
-		$statement = $this->_conn->prepare($query);
+        $query = 'UPDATE `publication` SET `description` = :new_d WHERE `id` = :id';
+        $statement = $this->_conn->prepare($query);
 
         $statement->bindParam(':new_d', $description, PDO::PARAM_STR);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
@@ -140,8 +140,8 @@ class PublicationModel extends Model
 
     public function setPublished($id, $published)
     {
-		$query = 'UPDATE `publication` SET `published` = :new_p WHERE `id` = :id';
-		$statement = $this->_conn->prepare($query);
+        $query = 'UPDATE `publication` SET `published` = :new_p WHERE `id` = :id';
+        $statement = $this->_conn->prepare($query);
 
         $statement->bindParam(':new_p', $published, PDO::PARAM_BOOL);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
