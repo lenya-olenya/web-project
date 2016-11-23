@@ -40,26 +40,25 @@ abstract class Model
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getList($lim1 = null, $lim2 = null)
+    public function getList($offset = null, $limit = null)
     {
-        if (!isset($lim1) && !isset($lim2)) {
+        if (!isset($offset) && !isset($limit)) {
             $query = "SELECT * FROM `{$this->_tableName}`";
             $statement = $this->_conn->prepare($query);
-        } elseif (!isset($lim1) && isset($lim2)) {
-            $query = "SELECT * FROM `{$this->_tableName}` LIMIT :lim2";
+        } elseif (!isset($offset) && isset($limit)) {
+            $query = "SELECT * FROM `{$this->_tableName}` LIMIT :lim";
             $statement = $this->_conn->prepare($query);
-            $statement->bindParam(':lim2', $lim2, PDO::PARAM_INT);
-            $statement->execute();
-        } elseif (isset($lim1) && !isset($lim2)) {
-            $query = "SELECT * FROM `{$this->_tableName}` LIMIT :lim1, :lim2";
+            $statement->bindParam(':lim', $limit, PDO::PARAM_INT);
+        } elseif (isset($offset) && !isset($limit)) {
+            $query = "SELECT * FROM `{$this->_tableName}` LIMIT :off, :lim";
             $statement = $this->_conn->prepare($query);
-            $statement->bindParam(':lim1', $lim1, PDO::PARAM_INT);
-            $statement->bindValue(':lim2', (int) $this->getCount(), PDO::PARAM_INT);
+            $statement->bindParam(':off', $offset, PDO::PARAM_INT);
+            $statement->bindValue(':lim', (int) $this->getCount(), PDO::PARAM_INT);
         } else {
-            $query = "SELECT * FROM `{$this->_tableName}` LIMIT :lim1, :lim2";
+            $query = "SELECT * FROM `{$this->_tableName}` LIMIT :off, :lim";
             $statement = $this->_conn->prepare($query);
-            $statement->bindParam(':lim1', $lim1, PDO::PARAM_INT);
-            $statement->bindParam(':lim2', $lim2, PDO::PARAM_INT);
+            $statement->bindParam(':off', $offset, PDO::PARAM_INT);
+            $statement->bindParam(':lim', $limit, PDO::PARAM_INT);
         }
 
         $statement->execute();
