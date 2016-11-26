@@ -7,4 +7,12 @@ return [
         'user' => 'root',
         'password' => '',
     ],
+
+    'router' => [
+        'exceptionRoutes' => [
+            //
+        ],
+
+        'defaultController' => 'publication',
+    ]
 ];
