@@ -1,10 +1,17 @@
 <?php
 
-require_once ROOT . '/models/ThemeModel.php';
+require_once ROOT . '/components/Router.php';
+require_once ROOT . '/components/exceptions/FileNotFoundException.php';
+require_once ROOT . '/components/exceptions/InvalidNameException.php';
 
 class Application
 {
     public static $config;
+
+    private $_router;
+    private $_controller;
+    private $_action;
+    private $_actionArgs;
 
     public function __construct(&$config)
     {
@@ -13,59 +20,41 @@ class Application
 
     public function run()
     {
-        // тесты модели
-
-        $model = new ThemeModel();
-
-        $ids = [
-            $model->add('Test Theme 1', 'Test Description 1'),
-            $model->add('Test Theme 2', 'Test Description 2', true),
-            $model->add('Test Theme 3', 'Test Description 3'),
-            $model->add('Test Theme 4', 'Test Description 4', true),
-            $model->add('Test Theme 5', 'Test Description 5'),
-            $model->add('Test Theme 6', 'Test Description 6', true),
-            $model->add('Test Theme 7', 'Test Description 7'),
-            $model->add('Test Theme 8', 'Test Description 8', true),
-            $model->add('Test Theme 9', 'Test Description 9'),
-            $model->add('Test Theme 10', 'Test Description 10', true),
-        ];
-
-        var_dump($ids);
-
-        //
-
-        echo '<h3>Получение количества записей</h3>';
-        var_dump($model->getCount());
-
-        //
-
-        echo '<h3>Обращение к конкретной строке</h3>';
-        var_dump($model->get($ids[5]));
-
-        //
-
-        echo '<h3>Вывод списка</h3>';
-
-        echo '<h4>Полностью</h4>';
-        var_dump($model->getList());
-
-        echo '<h4>Вывод, начиная с i, n элементов</h4>';
-        var_dump($model->getList(2, 5));
-
-        echo '<h4>Вывод, начиная с i, всех элементов</h4>';
-        var_dump($model->getList(2));
-
-        echo '<h4>Вывод, начиная с начала, n элементов</h4>';
-        var_dump($model->getList(5));
-
-        //
-
-        echo '<h4>Удаление</h4>';
-
-        foreach ($ids as $id) {
-            $model->delete($id);
+        try {
+            $this->_router = new Router();
+        } catch (FileNotFoundException $e) {
+            // 404
+            echo '404 file not found'; die;
+        } catch (InvalidNameException $e) {
+            // 404
+            echo '404'; die;
         }
 
-        echo 'passed';
+        $this->_controller = $this->_router->getController();
+        $this->_action = $this->_router->getActionName();
+        $this->_actionArgs = $this->_router->getActionArgs();
+
+        if (!method_exists($this->_controller, $this->_action)) {
+            // 404
+            echo '404'; die;
+        }
+
+        if (
+            count($this->_actionArgs) != (new ReflectionMethod(
+                $this->_controller,
+                $this->_action)
+            )->getNumberOfParameters()
+        ) {
+            // 404
+            echo '404'; die;
+        }
+
+        return call_user_func_array(
+            [
+                $this->_controller,
+                $this->_action
+            ],
+            $this->_actionArgs
+        );
     }
 }
