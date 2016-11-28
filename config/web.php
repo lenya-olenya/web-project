@@ -14,5 +14,11 @@ return [
         ],
 
         'defaultController' => 'publication',
-    ]
+    ],
+
+    'app' => [
+        'cookieKey' => 'asdg234b7aqw2-0jq',
+        'passwordLeftSalt' => 'asi87',
+        'passwordRightSalt' => '98sdhfw',
+    ],
 ];
