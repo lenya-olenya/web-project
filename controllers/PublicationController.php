@@ -16,20 +16,24 @@ class PublicationController extends Controller
 
         $this->_publicationsPerPage = 3;
         $this->_publicationModel = new PublicationModel();
-        $this->_defaultActionArgs = [1];
     }
 
     public function actionIndex()
     {
-        self::actionShowAll(1);
+        self::actionShowAll();
     }
 
     public function actionShowAll($page = 1)
     {
         $publications = $this->_publicationModel->getListPublished();
 
-        echo '<pre>';
-        var_dump($publications);
-        echo '</pre>';
+        include ROOT . '/views/publication/show-all.php';
+    }
+
+    public function actionShow($publicationId)
+    {
+        $p = $this->_publicationModel->get($publicationId);
+
+        include ROOT . '/views/publication/show.php';
     }
 }
