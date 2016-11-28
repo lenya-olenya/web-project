@@ -1,0 +1,155 @@
+article {
+    width: 800px;
+    margin: auto;
+}
+
+article header {
+    color: red;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+html {
+    background-color: #fcfcfe;
+}
+
+body {
+    font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+}
+
+form {
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Roboto, Georgia, Times, "Times New Roman", serif;
+    color: #1a181c;
+}
+
+h1 {
+    font-size: 4em;
+    font-weight: 100;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    line-height: 4rem;
+}
+
+.title {
+    font-size: 4em;
+    font-weight: 100;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    line-height: 4rem;
+    background-color: #406c8e;
+    color: #fcfcfe;
+    padding: 15px;
+}
+
+form {
+    padding: 20px;
+    width: 524px;
+    margin: auto;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+form ul {
+    list-style: outside none;
+}
+
+form li {
+    padding: 12px 0;
+    position: relative;
+}
+
+form label {
+    font-family: Roboto, sans-serif;
+    font-size: 1.2em;
+    font-weight: 400;
+    width: 200px;
+    margin-top: 3px;
+    display: inline-block;
+    float: left;
+    padding: 3px;
+}
+
+form input {
+    height: 20px;
+    width: 300px  ;
+    padding: 5px 8px;
+    font: 1em Roboto;
+    background-color: #fcfcfe;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+form input:focus {
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
+}
+
+button {
+    background-color: #406c8e;
+    color: #fcfcfe;
+    padding: 15px;
+    font-size: 1.1em;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    transition: background-color 0.3s
+}
+
+button:hover {
+    background-color: #7dadd3;
+    color: #fcfcfe;
+}
+
+button:active {
+    background-color: #1a181c;
+    color: #fcfcfe;
+}
+
+button.submit {
+    margin-top: 20px;
+    width: 100%;
+}
+
+body > header {
+    background-color: #1a181c;
+}
+
+body > header > ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+body > header li {
+    float: left;
+}
+
+body > header a {
+    display: block;
+    color: #7dadd3;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 1.1em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+body > header li a:hover {
+    background-color: #406c8e;
+    color: #fcfcfe;
+}
