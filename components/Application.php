@@ -6,6 +6,9 @@ require_once ROOT . '/components/exceptions/InvalidNameException.php';
 
 class Application
 {
+    const COOKIE_EXPIRE_SESSION = null;
+    const COOKIE_EXPIRE_YEAR = 60 * 60 * 24 * 365;
+
     public static $config;
 
     private $_router;
@@ -55,6 +58,72 @@ class Application
                 $this->_action
             ],
             $this->_actionArgs
+        );
+    }
+
+    public static function encryptCookie($value)
+    {
+        if (!$value) {
+            return false;
+        }
+
+        $ivSize = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
+        $iv = mcrypt_create_iv($ivSize, MCRYPT_RAND);
+
+        $cryptText = mcrypt_encrypt(
+            MCRYPT_RIJNDAEL_256,
+            md5(self::$config['app']['cookieKey']),
+            $value,
+            MCRYPT_MODE_ECB,
+            $iv
+        );
+
+        return trim(base64_encode($cryptText));
+    }
+
+    public static function decryptCookie($value)
+    {
+        if (!$value) {
+            return false;
+        }
+
+        $cryptText = base64_decode($value);
+        $ivSize = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
+        $iv = mcrypt_create_iv($ivSize, MCRYPT_RAND);
+
+        $decryptText = mcrypt_decrypt(
+            MCRYPT_RIJNDAEL_256,
+            md5(self::$config['app']['cookieKey']),
+            $cryptText,
+            MCRYPT_MODE_ECB,
+            $iv
+        );
+
+        return trim($decryptText);
+    }
+
+    public static function setSiteCookie(
+        string $name, $value, $expire = self::COOKIE_EXPIRE_SESSION
+    ) {
+        setcookie($name, self::encryptCookie($value), time() + $expire);
+    }
+
+    public static function getSiteCookie(string $name)
+    {
+        return $_COOKIE[$name] ?? null;
+    }
+
+    public static function eatCookie(string $name)
+    {
+        self::setSiteCookie($name, null);
+    }
+
+    public static function passwordHashCode(string $password) : string
+    {
+        return md5(
+            self::$config['app']['passwordLeftSalt'] .
+            $password .
+            self::$config['app']['passwordRightSalt']
         );
     }
 }
