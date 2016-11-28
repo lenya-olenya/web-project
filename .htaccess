@@ -2,4 +2,16 @@ AddDefaultCharset utf-8
 
 RewriteEngine on
 RewriteBase /
-RewriteRule ^(.*)$ index.php
+RewriteCond %{REQUEST_URI} !\.(css|jpg|gif|png|zip|rar|doc|xls|js|tif|tiff|docx|xlsx|ico)$
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+#    RewriteRule ^index\.php$ - [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.php
+</IfModule>
