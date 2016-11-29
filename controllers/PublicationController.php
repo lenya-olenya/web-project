@@ -28,13 +28,21 @@ class PublicationController extends Controller
 
     public function actionShowAll($page = 1)
     {
-        $publications = $this->_publicationModel->getListPublished();
+        $publications = $this->_publicationModel->getListPublished(
+            true,
+            ($page - 1) * $this->_publicationsPerPage,
+            $page * $this->_publicationsPerPage
+        );
 
         include ROOT . '/views/publication/show-all.php';
     }
 
     public function actionShowTheme($themeId, $page = 1) {
-        $publications = $this->_publicationModel->getListByThemeId($themeId);
+        $publications = $this->_publicationModel->getListByThemeIdPublished(
+            $themeId, true,
+            ($page - 1) * $this->_publicationsPerPage,
+            $page * $this->_publicationsPerPage
+        );
 
         include ROOT . '/views/publication/show-all.php';
     }
