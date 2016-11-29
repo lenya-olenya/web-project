@@ -8,7 +8,9 @@ require_once ROOT . '/templates/Head.php';
 require_once ROOT . '/templates/HeaderPanel.php';
 require_once ROOT . '/templates/Pagination.php';
 
-$head = new Head('Главная', Application::SITE_FONTS, Application::SITE_STYLES);
+$title = 'Главная';
+
+$head = new Head($title, Application::SITE_FONTS, Application::SITE_STYLES);
 $header = new HeaderPanel();
 $pagination = new Pagination();
 
@@ -22,7 +24,7 @@ $pageCount = ceil($this->_publicationModel->getCount() / (float) $this->_publica
 
 <?= $header->render() ?>
 
-<h1 class="title">Главная</h1>
+<h1 class="title"><?= $title ?></h1>
 
 <main class="publication-list">
   <ul class="article-previews">
