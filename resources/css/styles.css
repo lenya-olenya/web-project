@@ -207,7 +207,7 @@ ul.pagination li a:hover:not(.active) {
 }
 
 html {
-    background-image: url("/resources/web.jpg");
+    background-image: url("/resources/images/web.jpg");
     background-size: cover;
     background-attachment: fixed;
 }
