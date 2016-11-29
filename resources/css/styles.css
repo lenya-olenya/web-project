@@ -42,10 +42,6 @@ body {
     font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
 }
 
-form {
-
-}
-
 h1, h2, h3, h4, h5, h6 {
     font-family: Roboto, Georgia, Times, "Times New Roman", serif;
     color: #1a181c;
@@ -255,6 +251,7 @@ main {
     font-family: Roboto, sans-serif;
     background-color: #3d4652;
     padding: 10px 20px;
+    margin-bottom: 0;
 }
 
 .article-previews article p {
