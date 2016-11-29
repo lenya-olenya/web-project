@@ -44,7 +44,7 @@ class PublicationController extends Controller
             $page * $this->_publicationsPerPage
         );
 
-        include ROOT . '/views/publication/show-all.php';
+        include ROOT . '/views/publication/show-theme.php';
     }
 
     public function actionShow($publicationId)
