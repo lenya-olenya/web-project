@@ -2,21 +2,36 @@
 
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/styles.css">
-</head>
+<?php
+
+require_once ROOT . '/templates/Head.php';
+require_once ROOT . '/templates/HeaderPanel.php';
+
+$head = new Head($p['title'], Application::SITE_FONTS, Application::SITE_STYLES);
+$headerPanel = new HeaderPanel();
+
+?>
+
+<?= $head->render() ?>
 
 <body>
 
-<article>
-    <header><?= $p['title'] ?></header>
-    <?= $p['content'] ?>
-    <footer><?= $p['date'] ?></footer>
-</article>
+<?= $headerPanel->render() ?>
 
-<a href="/">Ко всем новостям</a>
+<main>
+  <article>
+    <header><h1 class="title"><?= $p['title'] ?></h1></header>
+
+    <div class="article-content">
+        <?= $p['content'] ?>
+    </div>
+
+    <footer>
+      <span><?= $p['date'] ?></span>
+      <span class="back"><a href="/">« Назад к новостям</a></span>
+    </footer>
+  </article>
+</main>
 
 </body>
 
