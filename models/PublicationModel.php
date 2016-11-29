@@ -40,22 +40,41 @@ class PublicationModel extends Model
     public function getListByThemeId($themeId, $offset = null, $limit = null)
     {
         if (!isset($offset) && !isset($limit)) {
-            $query = 'SELECT * FROM `publication` WHERE `theme_id` = :tid';
+            $query =
+                'SELECT * FROM `publication` ' .
+                'WHERE `theme_id` = :tid ' .
+                'ORDER BY `date` DESC';
+
             $statement = $this->_conn->prepare($query);
             $statement->bindParam(':tid', $themeId, PDO::PARAM_INT);
+
         } elseif (!isset($offset) && isset($limit)) {
-            $query = 'SELECT * FROM `publication` WHERE `theme_id` = :tid LIMIT :lim';
+            $query =
+                'SELECT * FROM `publication` ' .
+                'WHERE `theme_id` = :tid LIMIT :lim ' .
+                'ORDER BY `date` DESC';
+
             $statement = $this->_conn->prepare($query);
             $statement->bindParam(':tid', $themeId, PDO::PARAM_INT);
             $statement->bindParam(':lim', $limit, PDO::PARAM_INT);
+
         } elseif (isset($offset) && !isset($limit)) {
-            $query = 'SELECT * FROM `publication` WHERE `theme_id` = :tid LIMIT :off, :lim';
+            $query =
+                'SELECT * FROM `publication` ' .
+                'WHERE `theme_id` = :tid LIMIT :off, :lim ' .
+                'ORDER BY `date` DESC';
+
             $statement = $this->_conn->prepare($query);
             $statement->bindParam(':tid', $themeId, PDO::PARAM_INT);
             $statement->bindParam(':off', $offset, PDO::PARAM_INT);
             $statement->bindValue(':lim', (int) $this->getCount(), PDO::PARAM_INT);
+
         } else {
-            $query = 'SELECT * FROM `publication` WHERE `theme_id` = :tid LIMIT :off, :lim';
+            $query =
+                'SELECT * FROM `publication` ' .
+                'WHERE `theme_id` = :tid LIMIT :off, :lim ' .
+                'ORDER BY `date` DESC';
+
             $statement = $this->_conn->prepare($query);
             $statement->bindParam(':tid', $themeId, PDO::PARAM_INT);
             $statement->bindParam(':off', $offset, PDO::PARAM_INT);
@@ -70,22 +89,41 @@ class PublicationModel extends Model
     public function getListPublished($published = true, $offset = null, $limit = null)
     {
         if (!isset($offset) && !isset($limit)) {
-            $query = 'SELECT * FROM `publication` WHERE `published` = :p';
+            $query =
+                'SELECT * FROM `publication` ' .
+                'WHERE `published` = :p ' .
+                'ORDER BY `date` DESC';
+
             $statement = $this->_conn->prepare($query);
             $statement->bindParam(':p', $published, PDO::PARAM_BOOL);
+
         } elseif (!isset($offset) && isset($limit)) {
-            $query = 'SELECT * FROM `publication` WHERE `published` = :p LIMIT :lim';
+            $query =
+                'SELECT * FROM `publication` ' .
+                'WHERE `published` = :p LIMIT :lim ' .
+                'ORDER BY `date` DESC';
+
             $statement = $this->_conn->prepare($query);
             $statement->bindParam(':p', $published, PDO::PARAM_BOOL);
             $statement->bindParam(':lim', $limit, PDO::PARAM_INT);
+
         } elseif (isset($offset) && !isset($limit)) {
-            $query = 'SELECT * FROM `publication` WHERE `published` = :p LIMIT :off, :lim';
+            $query =
+                'SELECT * FROM `publication` ' .
+                'WHERE `published` = :p LIMIT :off, :lim ' .
+                'ORDER BY `date` DESC';
+
             $statement = $this->_conn->prepare($query);
             $statement->bindParam(':p', $published, PDO::PARAM_BOOL);
             $statement->bindParam(':off', $offset, PDO::PARAM_INT);
             $statement->bindValue(':lim', (int) $this->getCount(), PDO::PARAM_INT);
+
         } else {
-            $query = 'SELECT * FROM `publication` WHERE `published` = :p LIMIT :off, :lim';
+            $query =
+                'SELECT * FROM `publication` ' .
+                'WHERE `published` = :p LIMIT :off, :lim ' .
+                'ORDER BY `date` DESC';
+
             $statement = $this->_conn->prepare($query);
             $statement->bindParam(':p', $published, PDO::PARAM_BOOL);
             $statement->bindParam(':off', $offset, PDO::PARAM_INT);
@@ -106,7 +144,8 @@ class PublicationModel extends Model
         if (!isset($offset) && !isset($limit)) {
             $query =
                 'SELECT * FROM `publication` ' .
-                'WHERE `theme_id` = :tid AND `published` = :p';
+                'WHERE `theme_id` = :tid AND `published` = :p ' .
+                'ORDER BY `date` DESC';
 
             $statement = $this->_conn->prepare($query);
 
@@ -116,7 +155,8 @@ class PublicationModel extends Model
         } elseif (!isset($offset) && isset($limit)) {
             $query =
                 'SELECT * FROM `publication` ' .
-                'WHERE `theme_id` = :tid AND `published` = :p LIMIT :lim';
+                'WHERE `theme_id` = :tid AND `published` = :p LIMIT :lim ' .
+                'ORDER BY `date` DESC';
 
             $statement = $this->_conn->prepare($query);
 
@@ -127,7 +167,8 @@ class PublicationModel extends Model
         } elseif (isset($offset) && !isset($limit)) {
             $query =
                 'SELECT * FROM `publication` ' .
-                'WHERE `theme_id` = :tid AND `published` = :p LIMIT :off, :lim';
+                'WHERE `theme_id` = :tid AND `published` = :p LIMIT :off, :lim ' .
+                'ORDER BY `date` DESC';
 
             $statement = $this->_conn->prepare($query);
 
@@ -139,7 +180,8 @@ class PublicationModel extends Model
         } else {
             $query =
                 'SELECT * FROM `publication` ' .
-                ' WHERE `theme_id` = :tid AND `published` = :p LIMIT :off, :lim';
+                ' WHERE `theme_id` = :tid AND `published` = :p LIMIT :off, :lim ' .
+                'ORDER BY `date` DESC';
 
             $statement = $this->_conn->prepare($query);
 
