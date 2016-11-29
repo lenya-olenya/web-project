@@ -287,3 +287,29 @@ main {
     margin: auto;
     margin-top: 20px;
 }
+
+/* publication/show */
+
+.article-content {
+    font-family: Roboto, sans-serif;
+    background-color: #7dadd3;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+.article-content p {
+    margin-bottom: 20px;
+}
+
+.article-content ul, .article-content ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.article-content li {
+    margin-bottom: 10px;
+}
+
+article footer {
+    margin-bottom: 40px;
+}
