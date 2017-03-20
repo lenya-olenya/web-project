@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
 
 <?php
 
@@ -10,9 +10,12 @@ require_once ROOT . '/templates/Pagination.php';
 
 $title = $this->_themeModel->getName($themeId);
 
-$head = new Head($title, Application::SITE_FONTS, Application::SITE_STYLES);
+$head = new Head($title);
 $header = new HeaderPanel();
 $pagination = new Pagination();
+
+$head->addStyle(Application::SITE_FONTS);
+$head->addStyle(Application::SITE_STYLES);
 
 $pageCount = ceil($this->_publicationModel->getCount() / (float) $this->_publicationsPerPage);
 
