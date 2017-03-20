@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
 
 <?php
 
 require_once ROOT . '/templates/Head.php';
 require_once ROOT . '/templates/HeaderPanel.php';
 
-$head = new Head($p['title'], Application::SITE_FONTS, Application::SITE_STYLES);
+$head = new Head($p['title']);
 $headerPanel = new HeaderPanel();
+
+$head->addStyle(Application::SITE_FONTS);
+$head->addStyle(Application::SITE_STYLES)
 
 ?>
 
