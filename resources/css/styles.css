@@ -1,16 +1,20 @@
+/* сброс */
 * {
     margin: 0;
     padding: 0;
     border: 0;
 }
 
+/* сбросить подсвечивание выбранных элементов */
 *:focus {
     outline: none;
 }
 
+/* article - элемент для представления записей */
 article {
     max-width: 800px;
     margin: auto;
+    cursor: default;
 }
 
 article > header {
@@ -64,6 +68,7 @@ h1 {
     color: #fcfcfe;
     padding: 15px;
     transition: letter-spacing 0.5s ease;
+    transition-delay: 0.3s;
 }
 
 .title:hover {
@@ -77,7 +82,7 @@ form {
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
     margin-top: 50px;
     margin-bottom: 10px;
-    background-color: #fcfcfe;
+    background-color: #7dadd3;
 }
 
 form ul {
@@ -102,7 +107,7 @@ form label {
 
 form input {
     height: 20px;
-    width: 300px  ;
+    width: 302px;
     padding: 5px 8px;
     font: 1em Roboto;
     background-color: #fcfcfe;
@@ -125,7 +130,7 @@ button {
 }
 
 button:hover {
-    background-color: #7dadd3;
+    background-color: #3d4652;
     color: #fcfcfe;
 }
 
@@ -209,23 +214,24 @@ html {
 }
 
 main {
-    margin-top: 40px;
+    padding: 15px;
     opacity: 0.8;
 }
 
 
 .article-previews {
+    display: flex;
+    flex-wrap: wrap;
     max-width: 1140px;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    list-style: none;
 }
 
 .article-previews li {
     background-color: #7dadd3;
-    list-style: none;
-    width: 550px;
-    float: left;
+    /*list-style: none;*/
+    max-width: 550px;
+    /*float: left;*/
     margin: 10px;
 }
 
@@ -242,9 +248,9 @@ main {
     padding: 20px;
 }
 
-.article-previews article {
-    width: auto;
-}
+/*.article-previews article {*/
+    /*width: auto;*/
+/*}*/
 
 .article-previews footer {
     color: #fcfcfe;
@@ -256,7 +262,7 @@ main {
 
 .article-previews article p {
     padding: 20px;
-    height: 100px;
+    min-height: 120px;
     font-family: Roboto;
 }
 
@@ -309,4 +315,14 @@ main {
 
 article footer {
     margin-bottom: 40px;
+}
+
+.scroll-area {
+    border: solid 2px #406c8e;
+    background: #7dadd3;
+    color: #1a181c;
+    padding: 4px;
+    width: 200px;
+    max-height: 500px;
+    overflow: auto;
 }
