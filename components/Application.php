@@ -107,9 +107,13 @@ class Application
     }
 
     public static function setSiteCookie(
-        string $name, $value, $expire = self::COOKIE_EXPIRE_SESSION
+        string $name, $value, $expire = self::COOKIE_EXPIRE_YEAR
     ) {
-        setcookie($name, self::encryptCookie($value), time() + $expire);
+        setcookie(
+            $name,
+            self::encryptCookie($value),
+            ($expire !== null) ? (time() + $expire) : null
+        );
     }
 
     public static function getSiteCookie(string $name)
